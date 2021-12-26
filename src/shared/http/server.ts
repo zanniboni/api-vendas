@@ -1,7 +1,12 @@
+/* Reflect-metada é utilizada em conjunto com o typeorm */
+import 'reflect-metadata';
+
+/* Import das bibliotecas */
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import routes from './routes';
 import AppError from './errors/AppError';
+import '@shared/typeorm';
 
 const app = express();
 
@@ -10,6 +15,10 @@ app.use(express.json());
 
 app.use(routes);
 
+/* Rota para gerenciamento de erros da aplicação
+Caso a aplicação retorne algum erro, o middleware abaixo
+é responsável por tratar esse erro através da criação
+de uma instância da classe AppError */
 app.use(
   (error: Error, request: Request, response: Response, next: NextFunction) => {
     if (error instanceof AppError) {
