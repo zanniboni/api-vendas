@@ -1,0 +1,11 @@
+docker run --name postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+
+Para executar o typeorm (criar e gerenciar as tabelas no banco)
+é necessário configurar o package.json para conter o script abaixo:
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js" => Abre a CLI do typeorm
+
+Depois, para executar as migrations do typeorm (criar tabelas no banco, etc)
+é só executar o comando npm run typeorm migrations:run e ele irá criar
+as tabelas que foram codadas nas migrations
+
+npm run typeorm migrations:create -n CreateUsers // Exemplo
