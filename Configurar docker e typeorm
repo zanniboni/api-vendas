@@ -7,3 +7,5 @@ Para executar o typeorm (criar e gerenciar as tabelas no banco)
 Depois, para executar as migrations do typeorm (criar tabelas no banco, etc)
 é só executar o comando npm run typeorm migrations:run e ele irá criar
 as tabelas que foram codadas nas migrations
+
+npm run typeorm migrations:create -n CreateUsers // Exemplo

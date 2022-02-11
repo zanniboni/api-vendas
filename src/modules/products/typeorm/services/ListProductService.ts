@@ -1,12 +1,8 @@
 import { getCustomRepository } from 'typeorm';
-import Product from '../entities/Product';
-import { ProductRepository } from '../repositories/Products.Repository';
 
-interface IRequest {
-  name: string;
-  price: number;
-  quantity: number;
-}
+import Product from '../entities/Product';
+
+import { ProductRepository } from '../repositories/Products.Repository';
 
 class ListProductService {
   public async execute(): Promise<Product[]> {
