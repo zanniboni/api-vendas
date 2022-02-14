@@ -1,6 +1,6 @@
 import AppError from '@shared/http/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import { UserRepository } from '../repositories/Users.Repository';
+import { UserRepository } from '../typeorm/repositories/Users.Repository';
 import { hash } from 'bcrypt';
 
 interface IRequest {
@@ -12,6 +12,7 @@ interface IRequest {
 class CreateUserService {
   public async execute({ name, email, password }: IRequest) {
     const usersRepository = getCustomRepository(UserRepository);
+
     const userExists = await usersRepository.findByEmail(email);
 
     if (userExists) {

@@ -1,13 +1,15 @@
 import { Request, Response } from 'express';
-import CreateUserService from '../typeorm/services/CreateUserService';
-import UpdateUserService from '../typeorm/services/UpdateUserService';
-import ShowUserService from '../typeorm/services/ShowUserService';
-import ListUserService from '../typeorm/services/ListUserService';
-import DeleteUserService from '../typeorm/services/DeleteUserService';
+import CreateUserService from '../services/CreateUserService';
+import UpdateUserService from '../services/UpdateUserService';
+import ShowUserService from '../services/ShowUserService';
+import ListUserService from '../services/ListUserService';
+import DeleteUserService from '../services/DeleteUserService';
 
 export default class UserController {
   public async index(request: Request, response: Response) {
     const listUsers = new ListUserService();
+
+    console.log(request.user.id);
 
     const users = await listUsers.execute();
 
