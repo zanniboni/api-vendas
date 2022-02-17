@@ -1,12 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateUsers1644531814884 implements MigrationInterface {
+export class CreateUserTokens1644877586093 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
-
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'user_tokens',
 
         columns: [
           {
@@ -16,29 +14,16 @@ export class CreateUsers1644531814884 implements MigrationInterface {
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
           },
-
           {
-            name: 'name',
-            type: 'varchar',
+            name: 'token',
+            type: 'uuid',
+            generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
           },
-
           {
-            name: 'email',
-            type: 'varchar',
-            isUnique: true,
+            name: 'user_id',
+            type: 'uuid',
           },
-
-          {
-            name: 'password',
-            type: 'varchar',
-          },
-
-          {
-            name: 'avatar',
-            type: 'varchar',
-            isNullable: true,
-          },
-
           {
             name: 'created_at',
             type: 'timestamp',
@@ -51,11 +36,21 @@ export class CreateUsers1644531814884 implements MigrationInterface {
             default: 'now()',
           },
         ],
+        foreignKeys: [
+          {
+            name: 'TokenUser',
+            referencedTableName: 'users',
+            referencedColumnNames: ['id'],
+            columnNames: ['user_id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+          },
+        ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
+    await queryRunner.dropTable('user_tokens');
   }
 }
