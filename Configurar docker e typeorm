@@ -9,3 +9,4 @@ Depois, para executar as migrations do typeorm (criar tabelas no banco, etc)
 as tabelas que foram codadas nas migrations
 
 npm run typeorm migrations:create -n CreateUsers // Exemplo
+yarn typeorm migration:create -n [Nome]
