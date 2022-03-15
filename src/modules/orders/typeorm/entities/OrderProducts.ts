@@ -1,14 +1,16 @@
-import Product from '@modules/products/typeorm/entities/Product';
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
   Column,
-  ManyToOne,
+  CreateDateColumn,
+  Entity,
   JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
+
 import Order from './Order';
+
+import Product from '@modules/products/typeorm/entities/Product';
 
 @Entity('orders_products')
 class OrdersProducts {
@@ -22,6 +24,12 @@ class OrdersProducts {
   @ManyToOne(() => Product, product => product.order_products)
   @JoinColumn({ name: 'product_id' })
   product: Product;
+
+  @Column()
+  order_id: string;
+
+  @Column()
+  product_id: string;
 
   @Column('decimal')
   price: number;
